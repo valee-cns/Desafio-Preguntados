@@ -54,35 +54,51 @@ while run:
         if evento.type == pygame.MOUSEBUTTONDOWN:
             click = list(evento.pos)
 
-            if (click[0] > 600 and click[0] < 750) and (click[1] > 25 and click[1] < 75):
+            if (click[0] > 600 and click[0] < 750) and (click[1] > 25 and click[1] < 75): # Botón pregunta
                 if posicion >= 17:
+                    puntos = 0
                     la_pregunta = fuente2.render("", True, NEGRO)
                     rta_a = fuente.render("", True, NEGRO)
                     rta_b = fuente.render("", True, NEGRO)
                     rta_c = fuente.render("", True, NEGRO)
                     comenzar = fuente2.render(mensaje, True,NEGRO)
+                    score = fuente.render(str("Score: {0}".format(puntos)), True,NEGRO)
                     incorrecto = fuente2.render("", True,NEGRO)
                     mostrar_pregunta = False
                     error = 0
                     posicion_respuestas = 0
                 
                 else:
-                    la_pregunta = fuente2.render(str(preguntas[posicion]), True, NEGRO)
-                    rta_a = fuente.render(str(respuestas_a[posicion]), True, NEGRO)
-                    rta_b = fuente.render(str(respuestas_b[posicion]), True, NEGRO)
-                    rta_c = fuente.render(str(respuestas_c[posicion]), True, NEGRO)
-                    comenzar = fuente2.render("", True,NEGRO)
-                    incorrecto = fuente2.render("", True,NEGRO)
-                    mostrar_pregunta = True
-                    error = 0
-                
+                    if error > 0:
+                        la_pregunta = fuente2.render(str(preguntas[posicion]), True, NEGRO)
+                        rta_a = fuente.render(str(respuestas_a[posicion]), True, NEGRO)
+                        rta_b = fuente.render(str(respuestas_b[posicion]), True, NEGRO)
+                        rta_c = fuente.render(str(respuestas_c[posicion]), True, NEGRO)
+                        comenzar = fuente2.render("", True,NEGRO)
+                        incorrecto = fuente2.render("", True,NEGRO)
+                        mostrar_pregunta = True
+                        error = 0
+                        posicion_respuestas += 1
+                    
+                    else:
+                        la_pregunta = fuente2.render(str(preguntas[posicion]), True, NEGRO)
+                        rta_a = fuente.render(str(respuestas_a[posicion]), True, NEGRO)
+                        rta_b = fuente.render(str(respuestas_b[posicion]), True, NEGRO)
+                        rta_c = fuente.render(str(respuestas_c[posicion]), True, NEGRO)
+                        comenzar = fuente2.render("", True,NEGRO)
+                        incorrecto = fuente2.render("", True,NEGRO)
+                        mostrar_pregunta = True
+                        error = 0
+
                 if (posicion > len(preguntas)):
                     posicion = 0
+                    puntos = 0
                     la_pregunta = fuente2.render("", True, NEGRO)
                     rta_a = fuente.render("", True, NEGRO)
                     rta_b = fuente.render("", True, NEGRO)
                     rta_c = fuente.render("", True, NEGRO)
                     comenzar = fuente2.render(mensaje, True,NEGRO)
+                    score = fuente.render(str("Score: {0}".format(puntos)), True,NEGRO)
                     incorrecto = fuente2.render("", True,NEGRO)
                     mostrar_pregunta = False
                     error = 0
@@ -91,7 +107,7 @@ while run:
                 else:
                     posicion += 1
                 
-            if (click[0] > 18 and click[0] < 168) and (click[1] > 425 and click[1] < 475):
+            if (click[0] > 18 and click[0] < 168) and (click[1] > 425 and click[1] < 475): # Botón reiniciar
                 posicion = 0
                 puntos = 0
                 la_pregunta = fuente2.render("", True, NEGRO)
@@ -118,6 +134,7 @@ while run:
                         score = fuente.render(str("Score: {0}".format(puntos)), True,NEGRO)
                         posicion_respuestas += 1
                         mostrar_pregunta = False
+                        error = 0
 
                     elif 'a' != respuestas_correcta[posicion_respuestas]:
                         if error > 0:
@@ -127,8 +144,11 @@ while run:
                             incorrecto = fuente2.render(mensaje2, True,NEGRO)
                             mostrar_pregunta = False
                             posicion_respuestas += 1
-                        rta_a = fuente.render("", True, NEGRO)
-                        error += 1
+                            error = 0
+                        
+                        else:
+                            rta_a = fuente.render("", True, NEGRO)
+                            error += 1
 
                 if (click[0] > 300 and click[0] < 750) and (click[1] > 317 and click[1] < 367):
                         if 'b' == respuestas_correcta[posicion_respuestas]:
@@ -138,6 +158,7 @@ while run:
                             rta_c = fuente.render("", True, NEGRO)
                             comenzar = fuente2.render(mensaje, True,NEGRO)
                             puntos = puntos + 10
+                            error = 0
 
                             score = fuente.render(str("Score: {0}".format(puntos)), True,NEGRO)
                             posicion_respuestas += 1
@@ -151,8 +172,11 @@ while run:
                                 incorrecto = fuente2.render(mensaje2, True,NEGRO)
                                 mostrar_pregunta = False
                                 posicion_respuestas += 1
-                            rta_b = fuente.render("", True, NEGRO)
-                            error += 1
+                                error = 0
+                            
+                            else:
+                                rta_b = fuente.render("", True, NEGRO)
+                                error += 1
 
 
                 if (click[0] > 300 and click[0] < 750) and (click[1] > 397 and click[1] < 447):
@@ -163,6 +187,7 @@ while run:
                             rta_c = fuente.render("", True, NEGRO)
                             comenzar = fuente2.render(mensaje, True,NEGRO)
                             puntos = puntos + 10
+                            error = 0
 
                             score = fuente.render(str("Score: {0}".format(puntos)), True,NEGRO)
                             posicion_respuestas += 1
@@ -176,8 +201,11 @@ while run:
                                 incorrecto = fuente2.render(mensaje2, True,NEGRO)
                                 mostrar_pregunta = False
                                 posicion_respuestas += 1
-                            rta_c = fuente.render("", True, NEGRO)
-                            error += 1
+                                error = 0
+                            
+                            else:
+                                rta_c = fuente.render("", True, NEGRO)
+                                error += 1
 
 
 
